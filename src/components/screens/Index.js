@@ -36,7 +36,8 @@ const Index = ({navigation}) => {
      <Button title='OfflineLocalStorage' onPress={() =>
         navigation.navigate('OfflineImageUpload')}></Button>
      <Button title='Super' ></Button>
-     <Button title='InfiniteScrolling' ></Button>
+     <Button title='InfiniteScrolling' onPress={() =>
+        navigation.navigate('InfinityScrolling')} ></Button>
      <Button title='SuperMaxWithDeeplinking' ></Button>
     
     </View>

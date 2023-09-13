@@ -1,7 +1,7 @@
 import { View, Text, FlatList, ActivityIndicator,ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Card from './Card'
-import axios from 'axios'
+
 //https://randomuser.me/api/?page=3&results=10
 const InfiniteScrolling = () => {
   const[user,setUser] = useState([]);
@@ -50,7 +50,7 @@ const InfiniteScrolling = () => {
        
         <Card
           title="Sample Card"
-          imageSource="https://example.com/sample-image.jpg"
+          imageSource="https://imagesvibe.com/wp-content/uploads/2023/03/Cute-Panda-Images12.jpg"
           description="This is a sample card component in React Native."
           onPress={() => {
             // Handle card press event here
