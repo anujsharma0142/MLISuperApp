@@ -10,6 +10,7 @@ import InfiniteScrolling from './screens/InfinityScrolling';
 import Splash from './screens/SuperMax/splash/Splash';
 import SuperMax from './screens/SuperMax/SuperMax';
 import WebViewScreen from './screens/SuperMax/webviewscreen/WebViewScreen';
+import Todo from './screens/REALTIME/Todo';
 
 const Stack = createNativeStackNavigator();
 
@@ -47,6 +48,11 @@ const AppNavigation = () => {
             },
             headerTitleAlign: 'center',
           })}
+        />
+        <Stack.Screen
+          name="RealTime"
+          component={Todo}
+          options={{headerShown: false}}
         />
       </Stack.Navigator>
     </NavigationContainer>

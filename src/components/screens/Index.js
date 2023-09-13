@@ -11,7 +11,10 @@ const Index = ({navigation}) => {
         onPress={() => navigation.navigate('Calendar')}
       />
       <Button title="PushNotification" />
-      <Button title="RealTimeDataBase" />
+      <Button
+        title="RealTimeDataBase"
+        onPress={() => navigation.navigate('RealTime')}
+      />
       <Button
         title="OfflineLocalStorage"
         onPress={() => navigation.navigate('OfflineImageUpload')}

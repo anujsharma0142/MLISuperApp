@@ -1,36 +1,27 @@
 {
   "project_info": {
-    "project_number": "694580586580",
-    "project_id": "superapp-2aaed",
-    "storage_bucket": "superapp-2aaed.appspot.com"
+    "project_number": "893252935325",
+    "firebase_url": "https://super-app-d68eb-default-rtdb.firebaseio.com",
+    "project_id": "super-app-d68eb",
+    "storage_bucket": "super-app-d68eb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:694580586580:android:c1238d2957523a95d1e5c1",
+        "mobilesdk_app_id": "1:893252935325:android:0a60e1a44f136ea0acfe74",
         "android_client_info": {
           "package_name": "com.superapp"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "694580586580-1bc1bmb7o7l7t5l3qtlec726esa3co69.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCBZpWqzJ1fye9uv408hhU2RdDrvXbJ644"
+          "current_key": "AIzaSyCFONMJV-9eEdDhy_KVM8AYOpyKIr4Yf9c"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "694580586580-1bc1bmb7o7l7t5l3qtlec726esa3co69.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
