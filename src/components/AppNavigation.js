@@ -7,6 +7,7 @@ import Index from './screens/Index';
 import Card from './screens/Card';
 import ImageUpload from './ImageUpload';
 import InfiniteScrolling from './screens/InfinityScrolling';
+import PushNotification from './screens/PushNotification';
 
 const stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ const AppNavigation = () => {
         <stack.Screen name='Calendar' component={Calendar}/>
         <stack.Screen name='OfflineImageUpload' component={ImageUpload} />
         <stack.Screen name='InfinityScrolling' component={InfiniteScrolling} />
+        <stack.Screen name='PushNotification' component={PushNotification}/>
     </stack.Navigator>
    </NavigationContainer>
   )

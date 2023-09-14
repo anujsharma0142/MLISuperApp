@@ -31,7 +31,8 @@ const Index = ({navigation}) => {
     <View>
      <Button title='Calendar' onPress={() =>
         navigation.navigate('Calendar')} ></Button>
-     <Button title='PushNotification' ></Button>
+     <Button title='PushNotification' onPress={() =>
+        navigation.navigate('PushNotification')} ></Button>
       <Button title='RealTimeDataBase' ></Button>
      <Button title='OfflineLocalStorage' onPress={() =>
         navigation.navigate('OfflineImageUpload')}></Button>
