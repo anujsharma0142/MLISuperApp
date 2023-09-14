@@ -133,8 +133,9 @@ const Todo = () => {
             fontSize: 20,
             fontWeight: 'bold',
             color: '#111',
+            marginTop: 30,
           }}>
-          Todo App
+          RealTime DataBase
         </Text>
         <TextInput
           style={styles.inputBox}
@@ -162,7 +163,7 @@ const Todo = () => {
 
       <View style={styles.cardContainer}>
         <Text style={{marginVertical: 20, fontSize: 20, fontWeight: 'bold'}}>
-          Todo List
+          RealTime Data
         </Text>
 
         <FlatList

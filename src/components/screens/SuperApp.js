@@ -209,7 +209,7 @@ const SuperApp = () => {
             </Pressable>
 
             <Pressable
-              onPress={() => navigation.navigate('OfflineImageUpload')}
+              onPress={() => navigation.navigate('OFFLINE Image Upload')}
               style={{
                 width: 150,
                 height: 200,

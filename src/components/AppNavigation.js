@@ -122,7 +122,7 @@ const AppNavigation = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen name="Calendar" component={Calendar} />
-        <Stack.Screen name="OfflineImageUpload" component={ImageUpload} />
+        <Stack.Screen name="OFFLINE Image Upload" component={ImageUpload} />
         <Stack.Screen name="InfinityScrolling" component={InfiniteScrolling} />
         <Stack.Screen name="Push Notification" component={PushNotification} />
         <Stack.Screen

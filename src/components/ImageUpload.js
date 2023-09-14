@@ -1,21 +1,15 @@
-import {Button, Image, StyleSheet, Text, View} from 'react-native';
-
 import React, {useEffect, useState} from 'react';
-
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import DocumentPicker from 'react-native-document-picker';
-
 import storage from '@react-native-firebase/storage';
 
 const ImageUpload = () => {
   const [imageData, setImageData] = useState(null);
-
   const [isConnected, setIsConnected] = useState(false);
-
   const [showNetworkStatus, setShowNetworkStatus] = useState(true);
+  const [imageUploaded, setImageUploaded] = useState(false);
 
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
@@ -27,55 +21,45 @@ const ImageUpload = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (showNetworkStatus) {
-      const timer = setTimeout(() => {
-        setShowNetworkStatus(false);
-      }, 5000);
+  const uploadLocallyStoredData = async () => {
+    try {
+      if (isConnected && !imageUploaded) {
+        const storedData = await AsyncStorage.getItem(`/${imageData.name}`);
 
-      return () => clearTimeout(timer);
-    }
-  }, [showNetworkStatus]);
+        if (storedData) {
+          const uri = JSON.parse(storedData); // Parse the stored URI
 
-  useEffect(() => {
-    const uploadLocallyStoredData = async () => {
-      try {
-        if (isConnected) {
-          const storedData = await AsyncStorage.getItem(`/${imageData.name}`);
+          const response = storage().ref(`/${imageData.name}`);
+          const put = await response.putFile(uri);
 
-          if (storedData) {
-            const uri = JSON.parse(storedData); // Parse the stored uri
+          console.log(response);
 
-            const response = storage().ref(`/${imageData.name}`);
+          alert('Locally stored image uploaded successfully');
+          setImageUploaded(true);
 
-            const put = await response.putFile(uri);
-
-            console.log(response);
-
-            alert('Locally stored image uploaded successfully');
-
-            await AsyncStorage.removeItem(`/${imageData.name}`);
-          }
+          await AsyncStorage.removeItem(`/${imageData.name}`);
         }
-      } catch (err) {
-        console.log(err);
       }
-    };
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+  useEffect(() => {
     uploadLocallyStoredData();
-  }, [isConnected, imageData]);
+  }, [isConnected, imageUploaded]);
 
   const pickImage = async () => {
     try {
       const response = await DocumentPicker.pickSingle({
         type: [DocumentPicker.types.images],
-
         copyTo: 'cachesDirectory',
       });
 
       console.log(response);
 
       setImageData(response);
+      setImageUploaded(false); // Reset imageUploaded state
     } catch (error) {
       console.log(error);
     }
@@ -90,12 +74,12 @@ const ImageUpload = () => {
       if (isConnected) {
         try {
           const response = storage().ref(`/${imageData.name}`);
-
           const put = await response.putFile(imageData.fileCopyUri);
 
           console.log(response);
 
           alert('Image Uploaded Successfully');
+          setImageUploaded(true);
         } catch (err) {
           console.log(err);
         }
@@ -103,8 +87,7 @@ const ImageUpload = () => {
         try {
           await AsyncStorage.setItem(
             `/${imageData.name}`,
-
-            JSON.stringify(imageData.uri), // Store the whole uri
+            JSON.stringify(imageData.uri), // Store the whole URI
           );
 
           console.log('Image stored locally');
@@ -117,23 +100,57 @@ const ImageUpload = () => {
     }
   };
 
+  // Automatically upload the image when the network becomes available
+  useEffect(() => {
+    if (isConnected && !imageUploaded && imageData) {
+      uploadImage();
+    }
+  }, [isConnected]);
+
+  // Hide the network status after 3 seconds
+  useEffect(() => {
+    if (showNetworkStatus) {
+      const timer = setTimeout(() => {
+        setShowNetworkStatus(false);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showNetworkStatus]);
+
   return (
-    <View style={{flex: 1}}>
-      <View style={styles.profileHeader}>
-        <Text style={styles.profileHeaderText}>Profile</Text>
-      </View>
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <View style={styles.cardBody}>
+          <View style={styles.imageContainer}>
+            {imageData ? (
+              <Image
+                source={{uri: imageData.uri}}
+                style={styles.profileImage}
+              />
+            ) : (
+              <Image
+                source={{
+                  uri: 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp',
+                }}
+                style={styles.profileImage}
+              />
+            )}
+          </View>
+          <View style={styles.profileInfo}>
+            <Text style={styles.profileName}>Profile Change</Text>
 
-      <View style={styles.imageContainer}>
-        {imageData ? (
-          <Image source={{uri: imageData.uri}} style={styles.image} />
-        ) : (
-          <Text>No Image Found!</Text>
-        )}
-
-        <View style={styles.buttonContainer}>
-          <Button title="Select Image" onPress={pickImage} />
-
-          <Button title="Upload Image" onPress={uploadImage} />
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity style={styles.chatButton} onPress={pickImage}>
+                <Text style={styles.buttonText}>Select</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.followButton}
+                onPress={uploadImage}>
+                <Text style={styles.buttonText}>Upload</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       </View>
 
@@ -141,7 +158,6 @@ const ImageUpload = () => {
         <View
           style={[
             styles.networkStatus,
-
             {backgroundColor: isConnected ? 'green' : 'red'},
           ]}>
           <Text style={styles.networkStatusText}>
@@ -153,64 +169,76 @@ const ImageUpload = () => {
   );
 };
 
-export default ImageUpload;
-
 const styles = StyleSheet.create({
-  profileHeader: {
-    backgroundColor: '#f0f0f0',
-
-    padding: 10,
-  },
-
-  profileHeaderText: {
-    fontSize: 24,
-
-    textAlign: 'center',
-  },
-
-  imageContainer: {
+  container: {
     flex: 1,
-
+    backgroundColor: '#9de2ff',
     justifyContent: 'center',
-
     alignItems: 'center',
   },
-
-  image: {
-    width: 200,
-
-    height: 200,
-
-    marginBottom: 20,
-
-    borderRadius: 100,
-  },
-
-  buttonContainer: {
+  card: {
+    borderRadius: 15,
+    backgroundColor: 'white',
     width: '100%',
-
-    flexDirection: 'row',
-
-    justifyContent: 'space-around',
   },
-
-  networkStatus: {
-    position: 'absolute',
-
-    bottom: 0,
-
-    left: 0,
-
-    right: 0,
-
-    backgroundColor: 'red',
-
+  cardBody: {
+    padding: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  imageContainer: {
+    flexShrink: 0,
+  },
+  profileImage: {
+    width: 150,
+    height: 150,
+    borderRadius: 10,
+  },
+  profileInfo: {
+    flex: 1,
+    marginLeft: 20,
+  },
+  profileName: {
+    fontSize: 20,
+    marginBottom: 5,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  chatButton: {
+    flex: 1,
+    marginRight: 10,
+    borderWidth: 0.5,
+    borderColor: 'gray',
+    borderRadius: 5,
+    alignItems: 'center',
     padding: 10,
   },
-
+  followButton: {
+    flex: 1,
+    borderWidth: 0.5,
+    borderColor: 'gray',
+    borderRadius: 5,
+    alignItems: 'center',
+    padding: 10,
+  },
+  buttonText: {
+    color: 'black',
+    fontSize: 16,
+  },
+  networkStatus: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'red',
+    padding: 10,
+  },
   networkStatusText: {
     color: 'white',
-
     textAlign: 'center',
   },
 });
+
+export default ImageUpload;

@@ -52,7 +52,7 @@ const InfiniteScrolling = () => {
 
       <Card
         title="Sample Card"
-        imageSource="https://example.com/sample-image.jpg"
+        imageSource="https://www.leadsquared.com/wp-content/uploads/2021/11/1024x512max-life-insurance.jpg"
         description="This is a sample card component in React Native."
         onPress={() => {
           // Handle card press event here
