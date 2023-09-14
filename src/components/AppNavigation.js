@@ -21,6 +21,7 @@ import Calendars from './screens/Calendars';
 import Launcher from './screens/Launcher';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import Loader from './screens/loader/Loader';
+import PushNotification from './screens/PushNotification';
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -123,6 +124,7 @@ const AppNavigation = () => {
         <Stack.Screen name="Calendar" component={Calendar} />
         <Stack.Screen name="OfflineImageUpload" component={ImageUpload} />
         <Stack.Screen name="InfinityScrolling" component={InfiniteScrolling} />
+        <Stack.Screen name="Push Notification" component={PushNotification} />
         <Stack.Screen
           name="Splash"
           component={Splash}

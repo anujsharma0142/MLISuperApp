@@ -127,7 +127,7 @@ const SuperApp = () => {
             </Pressable>
 
             <Pressable
-              onPress={() => {}}
+              onPress={() => navigation.navigate('Push Notification')}
               style={{
                 width: 150,
                 height: 200,
