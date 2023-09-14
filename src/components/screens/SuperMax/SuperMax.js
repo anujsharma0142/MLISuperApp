@@ -19,19 +19,19 @@ const SuperMax = ({route}) => {
     {
       id: 1,
       title: `${I18n.t('mPro')}`,
-      // image: require('../../../../assets/mpro1.png'),
+      image: require('../../../../assets/mpro1.png'),
       webviewUrl: 'https://staging.lms.getvymo.com/#/login',
     },
     {
       id: 2,
       title: `${I18n.t('mPower')}`,
-      // image: require('../../../../assets/mpower.png'),
+      image: require('../../../../assets/mpower.png'),
       webviewUrl: 'https://www.mpowerfinancing.com/',
     },
     {
       id: 3,
       title: `${I18n.t('mQuote')}`,
-      // image: require('../../../../assets/mquote.png'),
+      image: require('../../../../assets/mquote.png'),
       webviewUrl:
         'https://www.maxlifeinsurance.com/term-insurance-plans/premium-calculator?utmCode=1311271&utm_theme=Brand&utm_source=google&utm_medium=cpc&utm_campaign=1_RLSA_BRAND_CS&utm_term=max%20life%20online&gclid=Cj0KCQjw5f2lBhCkARIsAHeTvlhKaAi_edEgBAGA_LfBgGAsyjR83PggzozQ6kSOTFlmbVxhh3wCYlQaAi0eEALw_wcB',
     },
@@ -39,7 +39,7 @@ const SuperMax = ({route}) => {
     {
       id: 4,
       title: `${I18n.t('maxlifeLite')}`,
-      // image: require('../../../../assets/maxlife_lite1.png'),
+      image: require('../../../../assets/maxlife_lite1.png'),
       webviewUrl: '',
     },
   ];
