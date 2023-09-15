@@ -8,6 +8,7 @@ import Card from './screens/Card';
 import ImageUpload from './ImageUpload';
 import InfiniteScrolling from './screens/InfinityScrolling';
 import PushNotification from './screens/PushNotification';
+import LoginScreen from './screens/LoginScreen';
 
 const stack = createNativeStackNavigator();
 
@@ -15,7 +16,7 @@ const AppNavigation = () => {
   return (
    <NavigationContainer>
     <stack.Navigator>
-     
+      <stack.Screen name='Login' component={LoginScreen} options={{headerShown: false}}  />
       <stack.Screen name='Main' component={Index} />
         <stack.Screen name='Calendar' component={Calendar}/>
         <stack.Screen name='OfflineImageUpload' component={ImageUpload} />
