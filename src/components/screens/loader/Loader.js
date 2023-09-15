@@ -16,7 +16,7 @@ const Loader = ({navigation}) => {
 
   useEffect(() => {
     if (!isLoading) {
-      navigation.navigate('Main');
+      navigation.navigate('Login');
     }
   }, [isLoading, navigation]);
 

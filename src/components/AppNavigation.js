@@ -12,7 +12,6 @@ import WebViewScreen from './screens/SuperMax/webviewscreen/WebViewScreen';
 import Todo from './screens/REALTIME/Todo';
 import SuperApp from './screens/SuperApp';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Home from './screens/Home';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Contacts from './screens/Contacts';
@@ -22,6 +21,8 @@ import Launcher from './screens/Launcher';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import Loader from './screens/loader/Loader';
 import PushNotification from './screens/PushNotification';
+import LoginScreen from './screens/LoginScreen';
+import Home from './screens/Home/Home';
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -114,6 +115,11 @@ const AppNavigation = () => {
         <Stack.Screen
           name="Loader"
           component={Loader}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen
